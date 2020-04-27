@@ -1,0 +1,124 @@
+; -- start job file --
+[global]
+bs=256k
+ioengine=libaio
+iodepth=4
+size=500g
+runtime=900
+group_reporting
+filename=/dev/nvme0n1
+
+; -- seq-read_none --
+
+
+[seq-read_none_1]
+ioscheduler=none
+numjobs=4
+direct=1
+rw=read
+stonewall
+
+; -- rand-read_none --
+
+[rand-read_none_1]
+ioscheduler=none
+numjobs=4
+direct=1
+rw=randread
+stonewall
+
+
+; -- seq-read_kyber --
+
+
+[seq-read_kyber_1]
+ioscheduler=kyber
+numjobs=4
+direct=1
+rw=read
+stonewall
+
+
+; -- rand-read_kyber --
+
+[rand-read_kyber_1]
+ioscheduler=kyber
+numjobs=4
+direct=1
+rw=randread
+
+stonewall
+
+; -- seq-read_mq-deadline --
+
+[seq-read_mq-deadline_1]
+ioscheduler=mq-deadline
+rw=read
+direct=1
+numjobs=4
+stonewall
+
+; -- rand-read_mq-deadline --
+
+
+[rand-read_mq-deadline_1]
+ioscheduler=mq-deadline
+rw=randread
+numjobs=4
+direct=1
+stonewall
+
+
+; -- seq-write_none --
+
+[seq-write_none_1]
+ioscheduler=none
+rw=write
+numjobs=4
+
+stonewall
+
+
+; -- rand-write_none --
+
+[rand-write_none_1]
+ioscheduler=none
+rw=randwrite
+numjobs=4
+
+stonewall
+
+; -- seq-write_kyber --
+
+[seq-write_kyber_1]
+ioscheduler=kyber
+rw=write
+numjobs=4
+stonewall
+
+; -- rand-write_kyber --
+
+[rand-write_kyber_1]
+ioscheduler=kyber
+rw=randwrite
+numjobs=4
+stonewall
+
+; -- seq-write_mq-deadline --
+
+[seq-write_mq-deadline_1]
+ioscheduler=mq-deadline
+rw=write
+numjobs=4
+stonewall
+
+; -- rand-write_mq-deadline --
+
+
+[rand-write_mq-deadline_1]
+ioscheduler=mq-deadline
+rw=randwrite
+numjobs=4
+stonewall
+
+; -- end job file --
